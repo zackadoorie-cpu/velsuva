@@ -9,6 +9,6 @@ return {
     dependencies = {
         "dmf",
     },
-    script_path = "scripts/mods/mission_board_unlock/mod",
+    script_path = "scripts/mods/mission_board_unlock/mod.lua",
     options_path = "scripts/mods/mission_board_unlock/mod_data",
 }

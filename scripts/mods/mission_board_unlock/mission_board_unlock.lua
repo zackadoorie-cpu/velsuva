@@ -7,6 +7,22 @@ if not mod then
     return
 end
 
+local function log_info(message)
+    if mod.info then
+        mod:info(message)
+    else
+        print("[mission_board_unlock] " .. message)
+    end
+end
+
+local function log_echo(message)
+    if mod.echo then
+        mod:echo(message)
+    else
+        print("[mission_board_unlock] " .. message)
+    end
+end
+
 -- Ensure the hook helpers are present before attempting to use them. If any are
 -- missing (e.g., DMF not fully initialized), exit early so the loader does not
 -- raise a nil-call error during startup.
@@ -29,7 +45,7 @@ local function localize(key, fallback)
 end
 
 -- Startup confirmation so the loader log clearly shows when the mod entrypoint is executed
-mod:info("Mission Board Unlock entrypoint loaded (mission_board_unlock.lua)")
+log_info("Mission Board Unlock entrypoint loaded (mission_board_unlock.lua)")
 
 -- Utility: reads user config flags
 local function is_enabled(setting_id)
@@ -189,7 +205,7 @@ local function ensure_widget_instances(self)
 
     if injected and not widgets_instantiated then
         widgets_instantiated = true
-        mod:echo("Mission Board Unlock UI widgets injected into mission board view.")
+        log_echo("Mission Board Unlock UI widgets injected into mission board view.")
     end
 end
 
@@ -229,9 +245,9 @@ local function refresh_board(self, preferred_map, preferred_difficulty)
             preferred_map = preferred_map,
             preferred_difficulty = preferred_difficulty,
         })
-        mod:echo("Mission board refreshed (cooldown bypassed).")
+        log_echo("Mission board refreshed (cooldown bypassed).")
     else
-        mod:echo("Mission board service unavailable; cannot refresh.")
+        log_echo("Mission board service unavailable; cannot refresh.")
     end
 end
 
@@ -282,9 +298,9 @@ mod:hook_require("scripts/ui/views/mission_board_view/mission_board_view", funct
         end
 
         if self._widgets_by_name then
-            mod:echo("Mission Board Unlock UI attached (refresh/map/difficulty/status).")
+            log_echo("Mission Board Unlock UI attached (refresh/map/difficulty/status).")
         else
-            mod:echo("Mission Board Unlock: widget table missing; view may be incompatible.")
+            log_echo("Mission Board Unlock: widget table missing; view may be incompatible.")
         end
     end)
 
@@ -375,8 +391,10 @@ mod:hook_require("scripts/managers/live_event/live_event_manager", function(mana
 end)
 
 -- Simple debug log so users can confirm the mod loaded
-mod:echo(
-    "Mission Board Unlock loaded. Cooldowns disabled: %s, manual refresh: %s",
-    tostring(is_enabled("unlock_board")),
-    tostring(is_enabled("allow_manual_refresh"))
+log_echo(
+    string.format(
+        "Mission Board Unlock loaded. Cooldowns disabled: %s, manual refresh: %s",
+        tostring(is_enabled("unlock_board")),
+        tostring(is_enabled("allow_manual_refresh"))
+    )
 )
