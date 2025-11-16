@@ -1,0 +1,3 @@
+# Ignore generated binary artifacts; build locally when needed
+dist/
+*.zip
