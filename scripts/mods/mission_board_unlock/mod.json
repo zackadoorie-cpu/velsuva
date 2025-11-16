@@ -4,5 +4,6 @@
   "author": "Community",
   "version": "1.0.0",
   "is_togglable": true,
-  "script_path": "scripts/mods/mission_board_unlock/mod"
+  "is_enabled_by_default": true,
+  "script_path": "scripts/mods/mission_board_unlock/mission_board_unlock"
 }

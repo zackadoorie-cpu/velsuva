@@ -5,6 +5,7 @@ return {
     version = "1.0.0",
     is_mutator = false,
     is_togglable = true,
-    script_path = "scripts/mods/mission_board_unlock/mod",
+    is_enabled_by_default = true,
+    script_path = "scripts/mods/mission_board_unlock/mission_board_unlock",
     options_path = "scripts/mods/mission_board_unlock/mod_data",
 }
