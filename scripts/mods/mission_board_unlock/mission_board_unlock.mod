@@ -6,6 +6,6 @@ return {
     is_mutator = false,
     is_togglable = true,
     is_enabled_by_default = true,
-    script_path = "scripts/mods/mission_board_unlock/mission_board_unlock",
+    script_path = "scripts/mods/mission_board_unlock/mod",
     options_path = "scripts/mods/mission_board_unlock/mod_data",
 }

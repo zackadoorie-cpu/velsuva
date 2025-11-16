@@ -12,7 +12,7 @@ Removes the mission board cooldown, adds a manual **Refresh Board** button, and 
 3. Ensure `mod_load_order.txt` contains **only** the folder names (one per line) that match your installed mod folders:
    - `dmf` (the Darktide Mod Framework folder name)
    - `mission_board_unlock`
-4. Confirm `mission_board_unlock.mod` exists in the installed folder; this manifest is what DMF loads. `mod.json` mirrors the same metadata and both point `script_path` to `scripts/mods/mission_board_unlock/mission_board_unlock.lua`.
+4. Confirm `mission_board_unlock.mod` exists in the installed folder; this manifest is what DMF loads. `mod.json` mirrors the same metadata and both point `script_path` to `scripts/mods/mission_board_unlock/mod` (which loads `mod.lua`, then `mission_board_unlock.lua`).
 5. Start the game in a modded realm. You should see `Mission Board Unlock entrypoint loaded (mission_board_unlock.lua)` in the console when the loader picks up the mod.
 
 ## Usage
@@ -23,7 +23,7 @@ Removes the mission board cooldown, adds a manual **Refresh Board** button, and 
 ## Files
 - `mission_board_unlock.mod`: DMF manifest the loader consumes to locate scripts and options.
 - `mod.json`: Manifest metadata (including `script_path`).
-- `mod.lua`: Optional helper kept for compatibility; the manifest now points directly to `mission_board_unlock.lua`.
+- `mod.lua`: Helper entrypoint that loads localization and then `mission_board_unlock.lua`.
 - `mod_data.lua`: Mod options and descriptions.
 - `mission_board_unlock.lua`: Core logic for disabling the cooldown, injecting UI controls, and handling refreshes (and logs the entrypoint load message).
 - `localization/localization.lua`: Localization strings for UI labels and settings.
