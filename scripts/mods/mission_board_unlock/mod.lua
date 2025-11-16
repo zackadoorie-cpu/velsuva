@@ -1,7 +1,9 @@
 local mod = get_mod("mission_board_unlock")
 
+-- If the mod API is unavailable, bail out quietly to avoid nil-call crashes. Do not
+-- use Log.* helpers here because they may also be missing when get_mod fails.
 if not mod then
-    Log.error("mission_board_unlock", "get_mod returned nil in mod.lua; aborting entrypoint load")
+    print("[mission_board_unlock] get_mod returned nil in mod.lua; aborting entrypoint load")
     return
 end
 

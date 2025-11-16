@@ -1,7 +1,9 @@
 local mod = get_mod("mission_board_unlock")
 
+-- If the mod API is unavailable, avoid calling Log helpers (they may also be nil) and
+-- exit quietly so the loader doesn't crash while scanning mods.
 if not mod then
-    Log.error("mission_board_unlock", "get_mod returned nil in mission_board_unlock.lua; aborting")
+    print("[mission_board_unlock] get_mod returned nil in mission_board_unlock.lua; aborting")
     return
 end
 
