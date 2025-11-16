@@ -1,10 +1,13 @@
 local mod = get_mod("mission_board_unlock")
 
 -- Load localization strings early so settings and UI labels resolve even if the
--- implementation hooks run slightly later.
+-- implementation hooks run slightly later. The add_localized_strings helper is
+-- not guaranteed on every DMF build, so guard it to avoid nil-call failures.
 local localization = require("scripts/mods/mission_board_unlock/localization/localization")
-if localization then
+if localization and mod.add_localized_strings then
     mod:add_localized_strings(localization)
+elseif localization then
+    mod:info("Mission Board Unlock: localization loaded (no add_localized_strings helper present)")
 end
 
 -- Load the main implementation from the same directory
