@@ -1,5 +1,10 @@
 local mod = get_mod("mission_board_unlock")
 
+if not mod then
+    Log.error("mission_board_unlock", "get_mod returned nil in mission_board_unlock.lua; aborting")
+    return
+end
+
 -- Startup confirmation so the loader log clearly shows when the mod entrypoint is executed
 mod:info("Mission Board Unlock entrypoint loaded (mission_board_unlock.lua)")
 

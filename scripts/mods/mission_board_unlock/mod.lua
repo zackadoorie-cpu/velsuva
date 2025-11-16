@@ -1,5 +1,10 @@
 local mod = get_mod("mission_board_unlock")
 
+if not mod then
+    Log.error("mission_board_unlock", "get_mod returned nil in mod.lua; aborting entrypoint load")
+    return
+end
+
 -- Load localization strings early so settings and UI labels resolve even if the
 -- implementation hooks run slightly later. The add_localized_strings helper is
 -- not guaranteed on every DMF build, so guard it to avoid nil-call failures.

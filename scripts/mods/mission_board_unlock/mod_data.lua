@@ -1,8 +1,22 @@
 local mod = get_mod("mission_board_unlock")
 
+local function safe_localize(key, fallback)
+    if mod and mod.localize then
+        local ok, value = pcall(mod.localize, mod, key)
+        if ok and value then
+            return value
+        end
+    end
+
+    return fallback
+end
+
 return {
-    name = mod:localize("mod_name"),
-    description = mod:localize("mod_description"),
+    name = safe_localize("mod_name", "Mission Board Unlock"),
+    description = safe_localize(
+        "mod_description",
+        "Removes the mission board cooldown, adds a manual refresh button, and exposes map/difficulty dropdowns."
+    ),
     author = "Community",
     version = "1.0.0",
     hot_reload = true,
