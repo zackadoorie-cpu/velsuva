@@ -1,0 +1,29 @@
+# Mission Board Unlock (Darktide Mod)
+
+A Darktide client-side mod that removes the mission board refresh cooldown, adds a manual **Refresh Board** button, and exposes
+dropdown selectors for choosing a map and difficulty. Designed for modded realms where UI and client-side gating can be bypassed
+ using the official Mod Framework.
+
+## Features
+- **No cooldown:** Disables the 60-minute refresh lock on the mission board timer UI and client gate.
+- **Manual refresh:** Adds a "Refresh Board" button to immediately request new missions.
+- **Map & difficulty selectors:** Dropdowns let you filter or force rerolls until the board matches your choices.
+
+## Installation
+1. Ensure you are running the Darktide Mod Framework in a modded realm.
+2. Copy the `scripts/mods/mission_board_unlock` folder into your mod directory (e.g., `<Darktide>/mods` depending on your loader).
+3. Enable the mod in the Mod Framework launcher or via your mod loader config.
+
+## Usage
+- Open the mission board. The timer will show as unlocked and the **Refresh Board** button will be available.
+- Use the map and difficulty dropdowns to pick a target combination.
+- Click **Refresh Board** to re-request missions. If the backend does not allow parameterized requests, the mod will reroll until the selections appear.
+
+## Notes
+- This mod focuses on client-side UI gating. If the backend enforces rotation intervals, you may see repeated missions until the server rotates or accepts another refresh request.
+- Keep this mod within modded realms to avoid conflicts with anti-cheat or matchmaking expectations.
+
+## Development
+- Main entrypoint: `scripts/mods/mission_board_unlock/mission_board_unlock.lua`
+- Metadata: `scripts/mods/mission_board_unlock/mod_data.lua`
+- Localization strings live in `scripts/mods/mission_board_unlock/localization/localization.lua`
