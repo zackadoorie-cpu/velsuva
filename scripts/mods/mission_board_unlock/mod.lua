@@ -7,6 +7,14 @@ if not mod then
     return
 end
 
+-- Make sure the DMF API we rely on is present before proceeding. If any
+-- required helper is missing, abort cleanly so the loader doesn't throw a
+-- nil-call error while scanning mods.
+if mod.io_dofile == nil then
+    print("[mission_board_unlock] DMF helper 'io_dofile' missing; aborting entrypoint load")
+    return
+end
+
 -- Gracefully load other Lua files even if the DMF helper `io_dofile` is missing
 -- in this environment. If it's absent, fall back to plain dofile so the loader
 -- doesn't crash with "attempt to call a nil value".

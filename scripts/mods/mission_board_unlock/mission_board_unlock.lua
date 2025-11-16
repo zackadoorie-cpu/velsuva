@@ -7,6 +7,27 @@ if not mod then
     return
 end
 
+-- Ensure the hook helpers are present before attempting to use them. If any are
+-- missing (e.g., DMF not fully initialized), exit early so the loader does not
+-- raise a nil-call error during startup.
+for _, fn in ipairs({ "hook_require", "hook_safe", "hook" }) do
+    if mod[fn] == nil then
+        print(string.format("[mission_board_unlock] DMF helper '%s' missing; aborting implementation load", fn))
+        return
+    end
+end
+
+local function localize(key, fallback)
+    if mod and mod.localize then
+        local ok, value = pcall(mod.localize, mod, key)
+        if ok and value then
+            return value
+        end
+    end
+
+    return fallback
+end
+
 -- Startup confirmation so the loader log clearly shows when the mod entrypoint is executed
 mod:info("Mission Board Unlock entrypoint loaded (mission_board_unlock.lua)")
 
@@ -17,10 +38,10 @@ end
 
 -- Attempt to pull map/difficulty catalogs at load so selectors can be populated
 local map_options = {
-    { text = mod:localize("map_dropdown_label"), value = "any" },
+    { text = localize("map_dropdown_label", "Preferred Map"), value = "any" },
 }
 local difficulty_options = {
-    { text = mod:localize("difficulty_dropdown_label"), value = "any" },
+    { text = localize("difficulty_dropdown_label", "Preferred Difficulty"), value = "any" },
 }
 
 -- Keep state to avoid infinite rerolls
@@ -67,7 +88,7 @@ mod:hook_require("scripts/ui/views/mission_board_view/mission_board_view_definit
         pass_template = "button_primary",
         scenegraph_id = anchor_id,
         content = {
-            text = mod:localize("refresh_button"),
+            text = localize("refresh_button", "Refresh Board"),
             hotspot = {},
         },
         style = {
@@ -80,8 +101,8 @@ mod:hook_require("scripts/ui/views/mission_board_view/mission_board_view_definit
         pass_template = "button_secondary",
         scenegraph_id = anchor_id,
         content = {
-            label = mod:localize("map_dropdown_label"),
-            text = mod:localize("map_dropdown_label"),
+            label = localize("map_dropdown_label", "Preferred Map"),
+            text = localize("map_dropdown_label", "Preferred Map"),
             hotspot = {},
         },
         style = {
@@ -94,8 +115,8 @@ mod:hook_require("scripts/ui/views/mission_board_view/mission_board_view_definit
         pass_template = "button_secondary",
         scenegraph_id = anchor_id,
         content = {
-            label = mod:localize("difficulty_dropdown_label"),
-            text = mod:localize("difficulty_dropdown_label"),
+            label = localize("difficulty_dropdown_label", "Preferred Difficulty"),
+            text = localize("difficulty_dropdown_label", "Preferred Difficulty"),
             hotspot = {},
         },
         style = {
@@ -108,7 +129,7 @@ mod:hook_require("scripts/ui/views/mission_board_view/mission_board_view_definit
         pass_template = "text_area",
         scenegraph_id = anchor_id,
         content = {
-            text = mod:localize("status_label_loading"),
+            text = localize("status_label_loading", "Mission Board Unlock: loading..."),
         },
         style = {
             text_color = { 255, 200, 255, 200 },
@@ -196,7 +217,7 @@ local function unlock_refresh_state(self)
 
         local status = self._widgets_by_name.unlock_status
         if status and status.content then
-            status.content.text = mod:localize("status_label_unlocked")
+            status.content.text = localize("status_label_unlocked", "Mission Board Unlock: cooldown disabled")
         end
     end
 end
