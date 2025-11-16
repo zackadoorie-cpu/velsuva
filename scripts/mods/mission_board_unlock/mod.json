@@ -1,0 +1,9 @@
+{
+  "name": "mission_board_unlock",
+  "description": "Removes the mission board cooldown, adds refresh/map/difficulty controls, and keeps the board unlocked.",
+  "version": "1.0.0",
+  "script_files": [
+    "scripts/mods/mission_board_unlock/mod.lua"
+  ],
+  "options_file": "scripts/mods/mission_board_unlock/mod_data.lua"
+}
