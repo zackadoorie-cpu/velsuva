@@ -1,2 +1,2 @@
-darktide-mod-framework
+dmf
 mission_board_unlock
