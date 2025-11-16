@@ -6,6 +6,9 @@ return {
     is_mutator = false,
     is_togglable = true,
     is_enabled_by_default = true,
+    dependencies = {
+        "dmf",
+    },
     script_path = "scripts/mods/mission_board_unlock/mod",
     options_path = "scripts/mods/mission_board_unlock/mod_data",
 }

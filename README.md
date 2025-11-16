@@ -12,7 +12,7 @@ Removes the mission board cooldown, adds a manual **Refresh Board** button, and 
 3. Ensure `mod_load_order.txt` contains **only** the folder names (one per line) that match your installed mod folders:
    - `dmf` (the Darktide Mod Framework folder name)
    - `mission_board_unlock`
-4. Confirm `mission_board_unlock.mod` exists in the installed folder; this manifest is what DMF loads. `mod.json` mirrors the same metadata and both point `script_path` to `scripts/mods/mission_board_unlock/mod` (which loads `mod.lua`, then `mission_board_unlock.lua`).
+4. Confirm `mission_board_unlock.mod` exists in the installed folder; this manifest is what DMF loads. `mod.json` mirrors the same metadata, declares `dmf` as a dependency, and both point `script_path` to `scripts/mods/mission_board_unlock/mod` (which loads `mod.lua`, then `mission_board_unlock.lua`).
 5. Start the game in a modded realm. You should see `Mission Board Unlock entrypoint loaded (mission_board_unlock.lua)` in the console when the loader picks up the mod.
 
 ## Usage
