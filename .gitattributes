@@ -1,0 +1,11 @@
+# Normalize text files and make sure Lua/Markdown are treated as text so GitHub shows diffs
+* text=auto
+*.lua text eol=lf
+*.md text eol=lf
+*.txt text eol=lf
+
+# Explicitly mark common binary formats as binary so they aren't misdetected as text
+*.zip binary
+*.pak binary
+*.exe binary
+*.dll binary
