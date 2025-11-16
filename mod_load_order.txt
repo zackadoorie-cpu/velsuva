@@ -1,0 +1,4 @@
+# Add each mod you want to load on its own line. The Darktide Mod Framework must appear first.
+# Example minimal load order with this mod:
+Darktide Mod Framework
+mission_board_unlock
